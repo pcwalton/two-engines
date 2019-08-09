@@ -186,7 +186,10 @@
         </div>
         <div class=component>
             <div class=purpose>URL parser</div>
-            <div class="shared-component rust">url (Rust crate)</div>
+            <div class=individual-component>
+                <div class="gecko cpp">Gecko URL parser</div>
+                <div class="servo rust">url (Rust crate)</div>
+            </div>
         </div>
         <div class=component>
             <div class=purpose>Text encoding</div>
@@ -253,6 +256,13 @@
             </div>
         </div>
         <div class=component>
+            <div class=purpose>IndexedDB</div>
+            <div class=individual-component>
+                <div class="gecko cpp">Gecko IndexedDB</div>
+                <div class="servo none"></div>
+            </div>
+        </div>
+        <div class=component>
             <div class=purpose>HTML editor</div>
             <div class=individual-component>
                 <div class="gecko cpp">libeditor</div>
@@ -306,7 +316,14 @@
             </div>
         </div>
         <div class=component>
-            <div class=purpose>Media</div>
+            <div class=purpose>Media interface</div>
+            <div class=individual-component>
+                <div class="gecko cpp">Gecko media</div>
+                <div class="servo rust">media (Rust crate)</div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>Media implementation</div>
             <div class=individual-component>
                 <div class="gecko cpp">Gecko media</div>
                 <div class="servo cpp">GStreamer</div>
@@ -315,7 +332,7 @@
         <div class=component>
             <div class=purpose>WebRTC</div>
             <div class=individual-component>
-                <div class="gecko cpp">Gecko WebRTC</div>
+                <div class="gecko cpp">libwebrtc</div>
                 <div class="servo cpp">GStreamer</div>
             </div>
         </div>
@@ -367,7 +384,7 @@
             <div class=purpose>Web Bluetooth</div>
             <div class=individual-component>
                 <div class="gecko none"></div>
-                <div class="servo rust">Servo WebBluetooth</div>
+                <div class="servo rust">Servo Web Bluetooth</div>
             </div>
         </div>
         <div class=component>
@@ -389,9 +406,23 @@
             </div>
         </div>
         <div class=component>
+            <div class=purpose>Accessibility</div>
+            <div class=individual-component>
+                <div class="gecko cpp">Gecko accessibility</div>
+                <div class="servo none"></div>
+            </div>
+        </div>
+        <div class=component>
             <div class=purpose>PDF</div>
             <div class=individual-component>
                 <div class="gecko js">pdf.js</div>
+                <div class="servo none"></div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>FTP</div>
+            <div class=individual-component>
+                <div class="gecko cpp">Gecko FTP browser</div>
                 <div class="servo none"></div>
             </div>
         </div>
