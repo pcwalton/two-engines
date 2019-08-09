@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>A tale of two engines</title>
+    <style>
+        body, html {
+            margin: 0;
+            font-family: sans-serif;
+            font-size: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            margin: 12px auto;
+            width: 80%;
+        }
+
+        header {
+            font-weight: bold;
+        }
+
+        header, .component {
+            display: flex;
+            flex-direction: row;
+        }
+
+        header, .component, .legend {
+            margin: 12px 0;
+        }
+
+        .purpose, .gecko, .servo, .shared-component {
+            padding: 12px;
+            box-sizing: border-box;
+        }
+
+        .gecko {
+            margin-right: 12px;
+        }
+
+        .servo {
+            margin-left: 12px;
+        }
+
+        .gecko, .servo, .shared-component {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .purpose {
+            width: 34%;
+        }
+
+        .gecko, .servo {
+            flex-grow: 1;
+            flex-basis: 0;
+        }
+
+        .individual-component {
+            display: flex;
+        }
+
+        .individual-component, .shared-component {
+            width: 66%;
+        }
+
+        .component .gecko, .component .servo, .component .shared-component {
+            border: solid black 1px;
+            text-align: center;
+        }
+
+        .purpose {
+            text-align: right;
+            font-style: italic;
+        }
+
+        .none {
+            border: none !important;
+        }
+
+        .rust {
+            background: #e0b4c0;
+        }
+
+        .cpp {
+            background: #badfe9;
+        }
+
+        .python {
+            background: #bfd1a5;
+        }
+
+        .js {
+            background: #ebe3af;
+        }
+
+        .legend {
+            text-align: center;
+            font-size: smaller;
+            width: 100%;
+        }
+
+        .legend ul {
+            display: inline;
+        }
+
+        .legend li {
+            display: inline;
+            list-style-type: none;
+            margin: 0 24px;
+        }
+
+        .swatch {
+            border: solid black 1px;
+            width: 12px;
+            height: 12px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <h1>A tale of two engines</h1>
+    <main>
+        <div class=legend>
+            <ul>
+                <li><span class="swatch rust"></span> Rust</li>
+                <li><span class="swatch cpp"></span> C/C++</li>
+                <li><span class="swatch python"></span> Python</li>
+                <li><span class="swatch js"></span> JavaScript</li>
+            </ul>
+        </div>
+        <header>
+            <div class=purpose>Purpose</div>
+            <div class=gecko>Gecko</div>
+            <div class=servo>Servo</div>
+        </header>
+        <div class=component>
+            <div class=purpose>JavaScript engine</div>
+            <div class="shared-component cpp">SpiderMonkey</div>
+        </div>
+        <div class=component>
+            <div class=purpose>WebAssembly</div>
+            <div class="shared-component cpp">SpiderMonkey</div>
+        </div>
+        <div class=component>
+            <div class=purpose></div>
+            <div class="shared-component rust">Cranelift</div>
+        </div>
+        <div class=component>
+            <div class=purpose>Memory allocator</div>
+            <div class="shared-component cpp">jemalloc</div>
+        </div>
+        <div class=component>
+            <div class=purpose>Network manager and cache</div>
+            <div class=individual-component>
+                <div class="gecko cpp">Necko</div>
+                <div class="servo rust">net (Servo component)</div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>HTTP</div>
+            <div class=individual-component>
+                <div class="gecko cpp">Necko</div>
+                <div class="servo rust">hyper</div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>SSL/TLS</div>
+            <div class=individual-component>
+                <div class="gecko cpp">NSS</div>
+                <div class="servo cpp">OpenSSL</div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>Brotli</div>
+            <div class=individual-component>
+                <div class="gecko cpp">Google brotli</div>
+                <div class="servo rust">brotli (Rust crate)</div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>URL parser</div>
+            <div class="shared-component rust">url (Rust crate)</div>
+        </div>
+        <div class=component>
+            <div class=purpose>Text encoding</div>
+            <div class="shared-component rust">encoding (Rust crate)</div>
+        </div>
+        <div class=component>
+            <div class=purpose>HTML parser</div>
+            <div class=individual-component>
+                <div class="gecko cpp">Validator.nu</div>
+                <div class="servo rust">html5ever</div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>UI toolkit</div>
+            <div class=individual-component>
+                <div class="gecko cpp">XUL</div>
+                <div class="servo none"></div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>JS-DOM bindings glue layer</div>
+            <div class=individual-component>
+                <div class="gecko cpp">XPCOM</div>
+                <div class="servo rust">Servo bindings</div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>JS-DOM bindings generator</div>
+            <div class="shared-component python">Paris bindings generator</div>
+        </div>
+        <div class=component>
+            <div class=purpose>Developer tools</div>
+            <div class=individual-component>
+                <div class="gecko cpp">devtools (Gecko)</div>
+                <div class="servo rust">devtools (Servo component)</div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>Profiler</div>
+            <div class=individual-component>
+                <div class="gecko cpp">Gecko profiler</div>
+                <div class="servo rust">profile (Servo component)</div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>DOM levels 0, 1, and 2</div>
+            <div class=individual-component>
+                <div class="gecko cpp">dom (Gecko)</div>
+                <div class="servo rust">script/dom (Servo module)</div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>CSSOM</div>
+            <div class=individual-component>
+                <div class="gecko cpp">dom (Gecko)</div>
+                <div class="servo rust">script/dom (Servo module)</div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>ServiceWorker</div>
+            <div class=individual-component>
+                <div class="gecko cpp">Gecko ServiceWorker</div>
+                <div class="servo rust">Servo ServiceWorker</div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>HTML editor</div>
+            <div class=individual-component>
+                <div class="gecko cpp">libeditor</div>
+                <div class="servo none"></div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>Styling</div>
+            <div class="shared-component rust">Stylo</div>
+        </div>
+        <div class=component>
+            <div class=purpose>Layout</div>
+            <div class=individual-component>
+                <div class="gecko cpp">layout (Gecko)</div>
+                <div class="servo rust">layout (Servo component)</div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>SVG</div>
+            <div class=individual-component>
+                <div class="gecko cpp">layout (Gecko)</div>
+                <div class="servo none"></div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>General imaging</div>
+            <div class=individual-component>
+                <div class="gecko cpp">imagelib</div>
+                <div class="servo rust">image (Rust crate)</div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>BMP & GIF</div>
+            <div class=individual-component>
+                <div class="gecko cpp">imagelib</div>
+                <div class="servo rust">image (Rust crate)</div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>JPEG</div>
+            <div class=individual-component>
+                <div class="gecko cpp">libjpeg-turbo</div>
+                <div class="servo rust">image (Rust crate)</div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>PNG</div>
+            <div class=individual-component>
+                <div class="gecko cpp">libpng</div>
+                <div class="servo rust">png (Rust crate)</div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>Media</div>
+            <div class=individual-component>
+                <div class="gecko cpp">Gecko media</div>
+                <div class="servo cpp">GStreamer</div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>WebRTC</div>
+            <div class=individual-component>
+                <div class="gecko cpp">Gecko WebRTC</div>
+                <div class="servo cpp">GStreamer</div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>Text shaping</div>
+            <div class="shared-component cpp">HarfBuzz</div>
+        </div>
+        <div class=component>
+            <div class=purpose>Font sanitation</div>
+            <div class="shared-component cpp">ots</div>
+        </div>
+        <div class=component>
+            <div class=purpose>2D canvas</div>
+            <div class="shared-component cpp">Moz2D & Skia</div>
+        </div>
+        <div class=component>
+            <div class=purpose></div>
+            <div class=individual-component>
+                <div class="gecko cpp">Cairo</div>
+                <div class="servo rust">Raqote</div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>WebGL</div>
+            <div class="shared-component cpp">ANGLE</div>
+        </div>
+        <div class=component>
+            <div class=purpose>WebGPU</div>
+            <div class=individual-component>
+                <div class="gecko cpp">Gecko WebGPU</div>
+                <div class="servo rust">wgpu-rs</div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>Gamepad API</div>
+            <div class=individual-component>
+                <div class="gecko cpp">Gecko Gamepad API</div>
+                <div class="servo rust">Servo Gamepad API</div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>Web Audio</div>
+            <div class=individual-component>
+                <div class="gecko cpp">Chromium Web Audio</div>
+                <div class="servo rust">media (Rust crate)</div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>Web Bluetooth</div>
+            <div class=individual-component>
+                <div class="gecko none"></div>
+                <div class="servo rust">Servo WebBluetooth</div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>WebXR</div>
+            <div class=individual-component>
+                <div class="gecko cpp">Gecko WebVR</div>
+                <div class="servo rust">Servo WebXR</div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>Compositing</div>
+            <div class="shared-component rust">WebRender</div>
+        </div>
+        <div class=component>
+            <div class=purpose>Printing</div>
+            <div class=individual-component>
+                <div class="gecko cpp">Gecko printing</div>
+                <div class="servo none"></div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>PDF</div>
+            <div class=individual-component>
+                <div class="gecko js">pdf.js</div>
+                <div class="servo none"></div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>IPC</div>
+            <div class=individual-component>
+                <div class="gecko cpp">Chromium IPC</div>
+                <div class="servo rust">ipc-channel/serde</div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>RPC</div>
+            <div class=individual-component>
+                <div class="gecko python">IPDL</div>
+                <div class="servo rust">ipc-channel/serde</div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>Multiprocess</div>
+            <div class=individual-component>
+                <div class="gecko cpp">Electrolysis</div>
+                <div class="servo rust">constellation (Servo component)</div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>Out-of-process iframes</div>
+            <div class=individual-component>
+                <div class="gecko cpp">Fission</div>
+                <div class="servo rust">constellation (Servo component)</div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>Sandbox</div>
+            <div class=individual-component>
+                <div class="gecko cpp">Chromium sandbox</div>
+                <div class="servo rust">gaol</div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>Windowing</div>
+            <div class=individual-component>
+                <div class="gecko cpp">Gecko widget</div>
+                <div class="servo rust">glutin</div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
