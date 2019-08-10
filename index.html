@@ -39,11 +39,11 @@
         }
 
         .gecko {
-            margin-right: 12px;
+            margin-right: 6px;
         }
 
         .servo {
-            margin-left: 12px;
+            margin-left: 6px;
         }
 
         .gecko, .servo, .shared-component {
@@ -71,8 +71,10 @@
         }
 
         .component .gecko, .component .servo, .component .shared-component {
-            border: solid black 1px;
+            border-width: 1px;
+            border-style: solid;
             text-align: center;
+            border-radius: 6px;
         }
 
         .purpose {
@@ -86,18 +88,22 @@
 
         .rust {
             background: #e0b4c0;
+            border-color: #e2194e;
         }
 
         .cpp {
             background: #badfe9;
+            border-color: #25b5dd;
         }
 
         .python {
             background: #bfd1a5;
+            border-color: #85d11b;
         }
 
         .js {
             background: #ebe3af;
+            border-color: #ebe3af;
         }
 
         .legend {
@@ -281,10 +287,38 @@
             <div class="shared-component rust">Stylo</div>
         </div>
         <div class=component>
-            <div class=purpose>Layout</div>
+            <div class=purpose>Frame builder</div>
             <div class=individual-component>
                 <div class="gecko cpp">layout (Gecko)</div>
                 <div class="servo rust">layout (Servo component)</div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>Block & inline layout</div>
+            <div class=individual-component>
+                <div class="gecko cpp">layout (Gecko)</div>
+                <div class="servo rust">layout (Servo component)</div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>Table layout</div>
+            <div class=individual-component>
+                <div class="gecko cpp">layout (Gecko)</div>
+                <div class="servo rust">layout (Servo component)</div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>Flexbox layout</div>
+            <div class=individual-component>
+                <div class="gecko cpp">layout (Gecko)</div>
+                <div class="servo rust">layout (Servo component)</div>
+            </div>
+        </div>
+        <div class=component>
+            <div class=purpose>Grid layout</div>
+            <div class=individual-component>
+                <div class="gecko cpp">layout (Gecko)</div>
+                <div class="servo none"></div>
             </div>
         </div>
         <div class=component>
